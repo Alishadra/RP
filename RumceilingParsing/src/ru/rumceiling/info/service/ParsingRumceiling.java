@@ -26,17 +26,16 @@ public class ParsingRumceiling {
 	}
 
 	private static String getImg(Document document) {
-		Elements artElements = document.getElementsByTag("link");
+		Elements artElements = document.getElementsByTag("img");
 		for (Element element : artElements) {
-			if(element.hasAttr("rel") && element.hasAttr("href") && element.attr("rel").equals("canonical")) {
-				return element.attr("href");
+			if (element.hasAttr("src") && element.hasAttr("class") && element.attr("class").equals("vc_gitem-zone-img")) {
+				return element.attr("src");
 			}
-		
-		return "";
-	
-		
-	}
-		return "";
+
+			return "";
+
 		}
+		return "";
+	}
 
 }
