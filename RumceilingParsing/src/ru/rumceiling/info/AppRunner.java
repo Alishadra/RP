@@ -1,19 +1,24 @@
 package ru.rumceiling.info;
 
-
-import ru.rumceiling.info.model.Entyty;
-import ru.rumceiling.info.service.ParsingRumceiling;
+import ru.rumceiling.info.service.FileManager;
+import ru.rumceiling.info.service.FotoPageService;
+import ru.rumceiling.info.service.NavigationService;
 
 public class AppRunner {
 
-	private static final String URL = "https://rumceiling.ru/fotogalereya/foto-tkanevye-natyazhnye-potolki/";
-	private static final String PostURL = "https://rumceiling.ru/wp-admin/admin-ajax.php";
-	public static void main(String[] args) {
+	private static final String FILE_URL = "C:\\Users\\HOME\\Desktop";
 
-		Entyty entity = ParsingRumceiling.getEntyty(URL);
+	public static void main(String[] args) {
 		
-		System.out.println(entity.getImg());
-		
+	FotoPageService fotoPageService = new FotoPageService();
+	fotoPageService.preparePostConnection(FILE_URL);
+	
+	NavigationService navigationService = new NavigationService();
+	navigationService.getNavigationLinks();
+	
+	FileManager fileManager = new FileManager();
+	fileManager.writeNavigationLinks(navigationService, true);
+
 	}
 
 }
