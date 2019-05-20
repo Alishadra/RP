@@ -1,23 +1,26 @@
 package ru.rumceiling.info.service;
 
 import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.Buffer;
+import java.net.URL;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class FileManager {
 	
+	private static final String DIR_PATH = "your/dir/"; //TODO set dir
 	
-	public static boolean writeNavigationLinks(NavigationService navigationLinks, boolean append) {
+	public static synchronized void writeNavigationLinks(String photoLink) {
 		
-		try (BufferedInputStream wr = new BufferedInputStream(new URL(FILE_URL).openStream());
-				FileOutputStream fileOutputStream = new FileOutputStream("foto")){
+		String fileName = StringUtils.substringAfterLast(photoLink, "/");
+		
+		try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new URL(photoLink).openStream());
+				FileOutputStream fileOutputStream = new FileOutputStream(DIR_PATH + fileName)){
 					byte dataBuffer[] = new byte[1024];
 					int byteRead;
-					while ((byteRead = in.read(dataBuffer, 0, 1024)) != -1) {
-						FileInputStream.write(dataBuffer, 0, byteRead);
+					while ((byteRead = bufferedInputStream.read(dataBuffer, 0, 1024)) != -1) {
+						fileOutputStream.write(dataBuffer, 0, byteRead);
 					}
 			
 		} catch (IOException e) {
@@ -25,15 +28,4 @@ public class FileManager {
 		}
 		
 	}
-//
-//	try (BufferedInputStream in = new BufferedInputStream(new URL(FILE_URL).openStream());
-//			  FileOutputStream fileOutputStream new FileOutputStream(FILE_NAME)) {
-//			    byte dataBuffer[] = new byte[1024];
-//			    int bytesRead;
-//			    while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
-//			        fileOutputStream.write(dataBuffer, 0, bytesRead);
-//			    }
-//			} catch (IOException e) {
-//			    // handle exception
-//			}
 }

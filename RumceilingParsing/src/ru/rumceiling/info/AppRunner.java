@@ -1,24 +1,19 @@
 package ru.rumceiling.info;
 
-import ru.rumceiling.info.service.FileManager;
-import ru.rumceiling.info.service.FotoPageService;
+import java.util.List;
+
 import ru.rumceiling.info.service.NavigationService;
+import ru.rumceiling.info.service.multithread.MultithreadPhotoExtraction;
 
 public class AppRunner {
 
-	private static final String FILE_URL = "C:\\Users\\HOME\\Desktop";
-
 	public static void main(String[] args) {
+
+		List<String> navLinks = NavigationService.getNavigationLinks();
+		for (String navLink : navLinks) {
+			MultithreadPhotoExtraction photoExtraction = new MultithreadPhotoExtraction(navLink);
+			photoExtraction.start();
+		}
 		
-	FotoPageService fotoPageService = new FotoPageService();
-	fotoPageService.preparePostConnection(FILE_URL);
-	
-	NavigationService navigationService = new NavigationService();
-	navigationService.getNavigationLinks();
-	
-	FileManager fileManager = new FileManager();
-	fileManager.writeNavigationLinks(navigationService, true);
-
 	}
-
 }

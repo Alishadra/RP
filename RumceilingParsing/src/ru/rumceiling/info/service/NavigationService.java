@@ -19,14 +19,13 @@ public class NavigationService {
 			Document document = Jsoup.connect(BASE_URL).get();
 
 			Element galeryElement = document.getElementById("nav-menu-item-1714");
-			Elements menuElements = galeryElement.getElementsByTag("a");
+			Elements liElements = galeryElement.getElementsByTag("li");
 
-			for (Element linkElement : menuElements) {
-				if (linkElement.hasAttr("href")) {
-
-					navigationLinks.add(linkElement.attr("href"));
+			for (Element liElement : liElements) {
+				Elements aElements = liElement.getElementsByTag("a");
+				for (Element aElement : aElements) {
+					navigationLinks.add(aElement.attr("href"));
 				}
-
 			}
 
 		} catch (IOException e) {
