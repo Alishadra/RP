@@ -5,6 +5,7 @@ import java.util.List;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Element;
 
+import ru.rumceiling.info.service.FileManager;
 import ru.rumceiling.info.service.FotoPageService;
 
 public class MultithreadPhotoExtraction extends Thread {
@@ -24,5 +25,9 @@ public class MultithreadPhotoExtraction extends Thread {
 		
 		// make download service
 		
+		for (String photoLink : photoLinks) {
+			FileManager.writeNavigationLinks(photoLink);
+			
+		}
 	}
 }

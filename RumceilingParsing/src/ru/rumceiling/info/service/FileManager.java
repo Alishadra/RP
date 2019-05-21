@@ -4,18 +4,20 @@ import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
 public class FileManager {
 	
-	private static final String DIR_PATH = "your/dir/"; //TODO set dir
+	private static final String DIR_PATH = "C:\\Users\\HOME\\Desktop\\"; 
 	
-	public static synchronized void writeNavigationLinks(String photoLink) {
+	public static synchronized void writeNavigationLinks(String photoLinks) {
 		
-		String fileName = StringUtils.substringAfterLast(photoLink, "/");
 		
-		try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new URL(photoLink).openStream());
+		String fileName = StringUtils.substringAfterLast(photoLinks, "/");
+		
+		try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new URL(photoLinks).openStream());
 				FileOutputStream fileOutputStream = new FileOutputStream(DIR_PATH + fileName)){
 					byte dataBuffer[] = new byte[1024];
 					int byteRead;

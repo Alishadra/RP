@@ -53,6 +53,8 @@ public class FotoPageService {
 
 		String settings = element.attr("data-vc-grid-settings");
 		settings = settings.replaceAll("&quot;", "\"");
+		
+		System.out.println(settings);
 		JSONObject setingsJson = new JSONObject(settings);
 
 		Map<String, String> params = getParams(setingsJson);
